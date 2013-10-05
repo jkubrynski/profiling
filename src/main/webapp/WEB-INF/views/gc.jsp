@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h1>GC Tester</h1>
 
+<div style="width:50%; float:left">
 <form action="/gc/create" method="POST">
     <p>
         <label for="threads">Thread num: </label>
@@ -21,3 +22,7 @@
         <input type="submit" value="Create process" />
     </p>
 </form>
+</div>
+<div style="width:50%; float:left">
+
+</div>

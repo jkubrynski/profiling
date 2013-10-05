@@ -40,7 +40,6 @@ public class GcTesterController {
     @RequestMapping(value = "/gc/kill", method = RequestMethod.GET)
     public String kill() {
         GcProcessRunner.stopCurrentProcess();
-        //do nothing
         return "gc";
     }
 

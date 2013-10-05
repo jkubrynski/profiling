@@ -1,0 +1,17 @@
+ How to build hsdis-amd64.dll and hsdis-i386.dll on Windows
+
+    Install Cygwin. At the "Select Packages" screen, add the following packages (by expanding the "Devel" category, then clicking once on the "Skip" label next to each package name):
+        make
+        mingw64-x86_64-gcc-core (only needed for hsdis-amd64.dll)
+        mingw-gcc-core (only needed for hsdis-i386.dll)
+    Run the Cygwin Terminal. This can be done using the Desktop or Start Menu icon created by the installer, and will create your Cygwin home directory (C:\cygwin\home\username by default).
+    Download the latest GNU binutils source package and extract its contents to your Cygwin home directory. At the time of writing, the latest package is binutils-2.22.tar.bz2. This should result in a directory named binutils-2.22 (or whatever the latest version is) in your Cygwin home directory.
+    Download the latest OpenJDK source package and extract the hsdis directory (found in openjdk\hotspot\src\share\tools) to your Cygwin home directory. At the time of writing, the latest package is openjdk-7u4-fcs-src-b22-02_may_2012.zip. This should result in a directory named hsdis in your Cygwin home directory.
+    In the Cygwin Terminal, enter cd hsdis.
+    To build hsdis-amd64.dll, enter make OS=Linux MINGW=x86_64-w64-mingw32 BINUTILS=~/binutils-2.22. To build hsdis-i386.dll, enter make OS=Linux MINGW=i686-pc-mingw32 BINUTILS=~/binutils-2.22. In either case, replace 2.22 with the binutils version you downloaded. OS=Linux is necessary because, although Cygwin is a Linux-like environment, the hsdis makefile fails to recognize it as such.
+
+The DLL can now be installed by copying it from hsdis\build\Linux-amd64 or hsdis\build\Linux-i586 to your JRE's bin\server or bin\client directory.
+
+Note that binutils and OpenJDK use incompatible licenses. As I understand it, this means that it is legal to combine them for personal use, but not to distribute the result. Because of this, I cannot provide prebuilt DLLs.
+
+Bonus tip: if you prefer Intel ASM syntax to AT&T, specify -XX:PrintAssemblyOptions=intel alongside any other PrintAssembly options you use.

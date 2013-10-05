@@ -13,8 +13,8 @@ public class GcTester {
     private final int clearTime;
     private final ExecutorService service;
 
-    private static ConcurrentLinkedQueue<Object> data = new ConcurrentLinkedQueue<>();
-    private static ConcurrentLinkedQueue<Object> constData = new ConcurrentLinkedQueue<>();
+    private ConcurrentLinkedQueue<Object> data = new ConcurrentLinkedQueue<>();
+    private ConcurrentLinkedQueue<Object> constData = new ConcurrentLinkedQueue<>();
     private static volatile boolean running = true;
 
     public GcTester(int threadNum, int arraySize, int clearTime) {
