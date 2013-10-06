@@ -2,6 +2,7 @@ package com.warecki.gc;
 
 import org.apache.commons.cli.*;
 
+import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -25,11 +26,12 @@ public class GcTester {
     }
 
     private void startFilling() {
+        final Random random = new Random();
         while (running) {
             service.submit(new Runnable() {
                 @Override
                 public void run() {
-                    data.add(new long[arraySize]);
+                    data.add(new long[random.nextInt() % arraySize]);
                 }
             });
 
@@ -50,12 +52,19 @@ public class GcTester {
             }
         });
 
+        final Random random = new Random();
         while (running) {
             try {
                 Thread.sleep(clearTime);
             } catch (InterruptedException e) {}
 
-            data.clear();
+
+            for(Object datum : data) {
+                int randomNumber = random.nextInt() % 3;
+                if(randomNumber == 1 || randomNumber == 2) {
+                    data.remove(datum);
+                }
+            }
         }
     }
 
