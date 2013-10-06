@@ -17,6 +17,8 @@ public class Order {
   private DateTime validDate;
   private OrderStatus status;
 
+  public Order() {
+  }
 
   private Order(String id, String description, Integer price, DateTime createDate, DateTime validDate, OrderStatus status) {
     this.id = id;
