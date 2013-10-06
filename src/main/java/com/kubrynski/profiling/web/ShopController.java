@@ -1,6 +1,7 @@
 package com.kubrynski.profiling.web;
 
 import com.kubrynski.profiling.repository.ShopRepository;
+import com.kubrynski.profiling.service.ShopService;
 import com.kubrynski.profiling.util.RandomProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,10 +19,19 @@ public class ShopController {
   @Autowired
   private ShopRepository shopRepository;
 
+  @Autowired
+  private ShopService shopService;
+
   @RequestMapping("/shops")
   public String all(Model model) {
     model.addAttribute("shops", shopRepository.findAll());
     return "shopList";
+  }
+
+  @RequestMapping("/shops/count")
+  public String shopCount(Model model) {
+    model.addAttribute("shopsCount", shopService.countShops());
+    return "shopsCount";
   }
 
 }
