@@ -1,5 +1,9 @@
 package com.warecki.jit;
 
+/**
+ * -XX:+UnlockDiagnosticVMOptions -XX:+PrintInlining
+ * -XX:MaxInlineSize=
+ */
 public class Inlining {
 
     public static void main(String[] args) {

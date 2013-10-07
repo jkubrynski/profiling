@@ -1,5 +1,11 @@
 package com.warecki.jit;
 
+
+/**
+ * -XX:+UnlockDiagnosticVMOptions  -XX:+PrintAssembly
+ * -XX:CompileThreshold=
+ * -XX:+PrintCompilation
+ */
 public class MemoryBarriers {
 
     int a, b;
@@ -30,7 +36,7 @@ public class MemoryBarriers {
 
     public static void main(final String[] args) {
         MemoryBarriers main = new MemoryBarriers();
-        for (int i = 0; i < 11000; i++) {
+        for (int i = 0; i < 10000; i++) {
             main.memBarTest();
         }
     }
