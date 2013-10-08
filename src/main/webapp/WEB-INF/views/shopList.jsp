@@ -14,6 +14,7 @@
       <td><c:out value="${shop.id}"/></td>
       <td><c:out value="${shop.name}"/></td>
       <td><c:out value="${shop.websiteUrl}"/></td>
+      <td><a href="<c:url value="/shops/verify/${shop.id}"/>">verify</a></td>
     </tr>
   </c:forEach>
   </tbody>

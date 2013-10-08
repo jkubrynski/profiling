@@ -1,5 +1,7 @@
 package com.kubrynski.profiling.service;
 
+import com.kubrynski.profiling.model.Shop;
+import com.kubrynski.profiling.repository.ShopRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,15 @@ public class ShopService {
 
   @Autowired
   private DataSource dataSource;
+
+  @Autowired
+  private ShopRepository shopRepository;
+
+  @Autowired
+  private BigService big;
+
+  @Autowired
+  private AntiFraudService antiFraud;
 
   public int countShops() {
 
@@ -52,5 +63,19 @@ public class ShopService {
 
 
     return size;
+  }
+
+  public String verifyShop(int shopId) {
+    Shop shop = shopRepository.findOne(Long.valueOf(shopId));
+
+    boolean result;
+    boolean bigCheckStatus = big.checkCompany(shop.getName());
+    boolean afmCheckStatus = antiFraud.verify(shop.getWebsiteUrl());
+    result = bigCheckStatus && afmCheckStatus;
+
+    shop.setVerified(result);
+    shopRepository.save(shop);
+
+    return result ? "verified" : "untrusted";
   }
 }
