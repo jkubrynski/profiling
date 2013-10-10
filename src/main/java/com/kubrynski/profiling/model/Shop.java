@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 @Entity
 public class Shop extends AbstractPersistable<Long> {
 
+  private boolean verified;
+
   public Shop() {
   }
 
@@ -36,5 +38,14 @@ public class Shop extends AbstractPersistable<Long> {
 
   public void setWebsiteUrl(String websiteUrl) {
     this.websiteUrl = websiteUrl;
+  }
+
+
+  public void setVerified(boolean verified) {
+    this.verified = verified;
+  }
+
+  public boolean isVerified() {
+    return verified;
   }
 }

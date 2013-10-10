@@ -2,12 +2,11 @@ package com.kubrynski.profiling.web;
 
 import com.kubrynski.profiling.repository.ShopRepository;
 import com.kubrynski.profiling.service.ShopService;
-import com.kubrynski.profiling.util.RandomProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author jkubrynski@gmail.com
@@ -34,4 +33,9 @@ public class ShopController {
     return "shopsCount";
   }
 
+  @RequestMapping("/shops/verify/{shopId}")
+  public String verify(@PathVariable int shopId, Model model) {
+    model.addAttribute("verificationStatus", shopService.verifyShop(shopId));
+    return "shopVerificationResult";
+  }
 }

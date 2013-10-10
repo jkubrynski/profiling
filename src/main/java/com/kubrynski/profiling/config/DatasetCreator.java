@@ -2,6 +2,8 @@ package com.kubrynski.profiling.config;
 
 import com.kubrynski.profiling.model.Shop;
 import com.kubrynski.profiling.repository.ShopRepository;
+import eu.codearte.fairyland.Hook;
+import eu.codearte.fairyland.producer.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,9 +21,11 @@ public class DatasetCreator {
 
   @PostConstruct
   public void initDataset() {
-    shopRepository.save(new Shop("Castorama", "www.castorama.pl"));
-    shopRepository.save(new Shop("Leroy Merlin", "www.leroymerlin.pl"));
-    shopRepository.save(new Shop("Empik", "www.empik.com"));
+    Hook hook = Hook.create();
+    for (int i = 0; i < 100; i++) {
+      Company company = hook.company();
+      shopRepository.save(new Shop(company.name(), company.url()));
+    }
   }
 
 }
