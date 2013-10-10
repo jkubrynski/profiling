@@ -3,6 +3,7 @@ package com.warecki.jit;
 /**
  * -XX:+UnlockDiagnosticVMOptions -XX:+PrintInlining
  * -XX:MaxInlineSize=
+ * -XX:MinInliningThreshold=
  */
 public class Inlining {
 
@@ -11,11 +12,11 @@ public class Inlining {
 
         inlining.cold(5, 9);
 
-        for (int i = 0; i < 14600; i++) {
+        for (int i = 0; i < 15000; i++) {
             inlining.hot(3, 4);
         }
 
-        for (int i = 0; i < 14600; i++) {
+        for (int i = 0; i < 15000; i++) {
             inlining.hotTooBig(3, 4);
         }
 

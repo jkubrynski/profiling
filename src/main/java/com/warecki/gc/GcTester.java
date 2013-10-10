@@ -31,7 +31,7 @@ public class GcTester {
             service.submit(new Runnable() {
                 @Override
                 public void run() {
-                    data.add(new long[random.nextInt() % arraySize]);
+                    data.add(new long[Math.abs(random.nextInt() % arraySize)]);
                 }
             });
 

@@ -9,6 +9,10 @@
         document.getElementById("jvmargs").value = jvmargs;
     }
 
+    function flightRecorder() {
+        setValues(20, 3000, 10000, 0, "-XX:+UnlockCommercialFeatures -XX:+FlightRecorder");
+    }
+
     function serialGC() {
         setValues(20, 3000, 10000, 0, "-server -XX:+UseSerialGC -Xmx500m");
     }
@@ -53,12 +57,16 @@
         setValues(50, 300, 10000, 0, "-server -XX:+UseParallelOldGC -Xmx500m -XX:MaxTenuringThreshold=");
     }
 
+    function occupancyFraction() {
+        setValues(50, 3000, 10000, 0, "-server -XX:+UseParallelOldGC -Xmx500m -XX:CMSInitiatingOccupancyFraction=");
+    }
+
     function maxG1Pause() {
         setValues(20, 3000, 10000, 0, "-server -XX:+UseG1GC -Xmx500m -XX:MaxGCPauseMillis=");
     }
 
     function competition() {
-        setValues(20, 3000, 10000, 0, "-server -XX:+UseParallelOldGC -Xmx500m TODO");
+        setValues(20, 1000, 20000, 5000000, "-server -XX:+UseParallelOldGC -Xmx500m -Xms500m");
     }
 
     function logsYoung() {
@@ -103,6 +111,7 @@
 </form>
 </div>
 <div style="width:50%; float:left">
+    <input type="button" value="JMC Flight Recorder" onclick="flightRecorder()" /><br style="line-height:1cm"/>
     <input type="button" value="Serial GC" onclick="serialGC()" /><br style="line-height:1cm"/>
     <input type="button" value="Parallel GC" onclick="parallelGC()" /><br style="line-height:1cm"/>
     <input type="button" value="Parallel Old GC" onclick="parallelOldGC()" /><br style="line-height:1cm"/>
@@ -113,6 +122,7 @@
     <input type="button" value="Exercise Xmn" onclick="xmn()" /><br style="line-height:1cm"/>
     <input type="button" value="Exercise Survivor Ratio" onclick="survivorRatio()" /><br style="line-height:1cm"/>
     <input type="button" value="Exercise Tenuring Threshold" onclick="maxTenuringThreashold()" /><br style="line-height:1cm"/>
+    <input type="button" value="Occupancy fraction" onclick="occupancyFraction()" /><br style="line-height:1cm"/>
     <input type="button" value="Exercise G1 Max GC Pause Millis" onclick="maxG1Pause()" /><br style="line-height:1cm"/>
     <input type="button" value="Competition" onclick="competition()" /><br style="line-height:1cm"/>
     <input type="button" value="Logs Young GC" onclick="logsYoung()" /><br style="line-height:1cm"/>
