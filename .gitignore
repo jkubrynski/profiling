@@ -1,6 +1,11 @@
 *.class
+target/
 
 # Package Files #
 *.jar
 *.war
 *.ear
+
+# IntelliJ IDEA #
+.idea/
+profiling.iml
